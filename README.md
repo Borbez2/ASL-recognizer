@@ -39,7 +39,10 @@ pip install -r requirements.txt
 
 5. Place the unzipped folder in the project directory
 
-6. Train the model (this will create the required model files):
+6. Extract hand landmarks from the dataset (this will create a CSV file with landmark data):
+```python "ASL landmark extraction.py"```
+
+7. Train the model (this will create the required model file):
 ```python train_model.py```
 
 ## Usage
@@ -53,7 +56,11 @@ pip install -r requirements.txt
 
 ## How it works
 
-The app uses a pre-trained EfficientNetB0 model (trained with `train_model.py`) to classify hand gestures. MediaPipe's hand tracking isolates your hand in the video frame before passing the image to the neural network for classification.
+The app uses a neural network model (trained with `train_model.py`) to classify hand gestures. MediaPipe's hand tracking extracts hand landmarks (x, y, z coordinates) from the video frame, which are then passed to the neural network for classification.
 
-The dataset contains thousands of labeled images representing the ASL alphabet, which are essential for training the model to accurately recognize gestures.
+The process involves two main steps:
+1. Landmark extraction: MediaPipe extracts 21 hand landmarks from each image
+2. Classification: A Multi-Layer Perceptron model predicts the ASL sign based on these landmarks
+
+The dataset contains thousands of labeled images representing the ASL alphabet, which are processed to extract hand landmarks for training the model to accurately recognize gestures.
 
